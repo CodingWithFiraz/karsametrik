@@ -1,22 +1,20 @@
-{
 
-    
-  "builds": [
-    {
-      "src": "NexaUMKM/backend/api.php",
-      "use": "vercel-php@0.7.0"
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "outputDirectory": "html",
+  "functions": {
+    "api/index.php": {
+      "runtime": "vercel-php@0.7.0"
     }
-  ],
-  
-  "routes": [
+  },
+  "rewrites": [
     {
-      "src": "/",
-      "dest": "/NexaUMKM/html/index.html"
+      "source": "/backend/api.php",
+      "destination": "/api/index.php"
     },
     {
-      "src": "/(.*)",
-      "dest": "/NexaUMKM/$1"
+      "source": "/api.php",
+      "destination": "/api/index.php"
     }
-    
   ]
 }
