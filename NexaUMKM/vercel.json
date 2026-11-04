@@ -1,9 +1,13 @@
 {
-  "functions": {
-    "**/*.php": {
-      "runtime": "vercel-php@0.7.0"
+
+    
+  "builds": [
+    {
+      "src": "NexaUMKM/backend/api.php",
+      "use": "vercel-php@0.7.0"
     }
-  },
+  ],
+  
   "routes": [
     {
       "src": "/",
@@ -13,5 +17,6 @@
       "src": "/(.*)",
       "dest": "/NexaUMKM/$1"
     }
+    
   ]
 }
