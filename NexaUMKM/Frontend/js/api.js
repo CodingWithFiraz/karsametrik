@@ -74,7 +74,11 @@ const DashboardAPI = {
     const limit  = opts.limit  || 15;
     const offset = opts.offset || 0;
     const q      = opts.q      || '';
-    return apiCall('umkm_list&limit=' + limit + '&offset=' + offset + '&q=' + encodeURIComponent(q));
+   return apiCall(
+  'umkm_list&limit=' + limit +
+  '&offset=' + offset +
+  '&search=' + encodeURIComponent(q)
+);
   },
   async getFactorAverages() { return apiCall('factor_averages'); },
   async getMe()  { return apiCall('me'); }
