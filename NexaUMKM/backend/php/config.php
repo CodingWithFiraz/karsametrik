@@ -1,19 +1,24 @@
 <?php
-define('DB_HOST',    getenv('DB_HOST')    ?: 'localhost');
-define('DB_PORT',    getenv('DB_PORT')    ?: '3306');
-define('DB_NAME',    getenv('DB_NAME')    ?: 'nexaumkm');
-define('DB_USER',    getenv('DB_USER')    ?: 'root');
-define('DB_PASS',    getenv('DB_PASS')    ?: '');
-define('DB_CHARSET', 'utf8mb4');
-define('APP_ENV',    getenv('APP_ENV')    ?: 'development');
-define('APP_DEBUG',  APP_ENV === 'development');
-define('CORS_ORIGIN', getenv('CORS_ORIGIN') ?: '*');
-define('JWT_SECRET', getenv('JWT_SECRET')   ?: 'NexaUMKM_JWT_Secret_Key_2026_XYZ');
-define('N8N_WEBHOOK_URL', getenv('N8N_WEBHOOK_URL') ?: 'http://localhost:5678/webhook-test/submit-sisehat');
+define('DB_HOST', getEnvVar('DB_HOST', '127.0.0.1'));
+define('DB_PORT', getEnvVar('DB_PORT', '4000'));
+define('DB_NAME', getEnvVar('DB_NAME', 'db_sisehat'));
+define('DB_USER', getEnvVar('DB_USER', 'root'));
+define('DB_PASS', getEnvVar('DB_PASS', ''));
+define('DB_CHARSET', getEnvVar('DB_CHARSET', 'utf8mb4'));
+define('APP_ENV',    getEnvVar('APP_ENV', 'production'));
+define('APP_DEBUG', getEnvVar('APP_DEBUG', 'false') === 'true');
+define('CORS_ORIGIN', getEnvVar('CORS_ORIGIN', '*'));
+define('JWT_SECRET', getEnvVar('JWT_SECRET', 'NexaUMKM_JWT_Secret_Key_2026_XYZ'));
+define('N8N_WEBHOOK_URL', getEnvVar('N8N_WEBHOOK_URL', 'http://localhost:5678/webhook-test/submit-sisehat'));
 define('JWT_EXPIRE', 60 * 60 * 8);
 define('PAGE_LIMIT_DEFAULT', 15);
 define('PAGE_LIMIT_MAX',    100);
 
+
+
+function getEnvVar($key, $default = '') {
+    return getenv($key) ?: ($_ENV[$key] ?? $_SERVER[$key] ?? $default);
+}
 
 function sendWebhookToN8n($payload) {
     $webhookUrl = N8N_WEBHOOK_URL;

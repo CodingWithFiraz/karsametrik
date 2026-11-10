@@ -4,7 +4,7 @@
  */
 
 // Path ke backend — relatif dari html/index.html
-const API_BASE = '../backend/api.php';
+const API_BASE = '/backend/api.php';
 
 // ── Token & user storage ──────────────────────────────────────
 const TokenStore = {
