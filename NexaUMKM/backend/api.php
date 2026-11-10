@@ -13,7 +13,8 @@
 //     GET    /api.php?action=dashboard         — agregat dashboard         [token required]
 //     GET    /api.php?action=umkm_list         — tabel UMKM + skor         [token required]
 //     GET    /api.php?action=factor_averages   — rata-rata 6 faktor        [token required]
- 
+ ini_set('display_errors', '0');
+error_reporting(E_ALL);
 
 require_once __DIR__ . '/php/config.php';
 require_once __DIR__ . '/php/db.php';

@@ -6,14 +6,19 @@ class DB {
     public static function pdo(): PDO {
         if (self::$pdo === null) {
             $dsn = "mysql:host=".DB_HOST.";port=".DB_PORT.";dbname=".DB_NAME.";charset=".DB_CHARSET;
+
+            // PHP 8.5+ memindahkan konstanta MySQL ke namespace Pdo\Mysql::
+            $attrInitCmd  = PHP_VERSION_ID >= 80500 ? Pdo\Mysql::ATTR_INIT_COMMAND          : PDO::MYSQL_ATTR_INIT_COMMAND;
+            $attrSslCa    = PHP_VERSION_ID >= 80500 ? Pdo\Mysql::ATTR_SSL_CA                : PDO::MYSQL_ATTR_SSL_CA;
+            $attrSslVerif = PHP_VERSION_ID >= 80500 ? Pdo\Mysql::ATTR_SSL_VERIFY_SERVER_CERT: PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT;
+
             $opts = [
-                PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+                PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
                 PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-                PDO::ATTR_EMULATE_PREPARES => false,
-                PDO::MYSQL_ATTR_INIT_COMMAND => "SET time_zone='+07:00'",
-                // Tambahan opsi SSL wajib untuk TiDB Cloud
-                PDO::MYSQL_ATTR_SSL_CA => true,
-                PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT => false
+                PDO::ATTR_EMULATE_PREPARES   => false,
+                $attrInitCmd                 => "SET time_zone='+07:00'",
+                $attrSslCa                   => true,
+                $attrSslVerif                => false,
             ];
             try { 
                 self::$pdo = new PDO($dsn, DB_USER, DB_PASS, $opts); 
