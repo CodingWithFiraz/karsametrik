@@ -6,7 +6,8 @@ define('DB_USER', getEnvVar('DB_USER', 'root'));
 define('DB_PASS', getEnvVar('DB_PASS', ''));
 define('DB_CHARSET', getEnvVar('DB_CHARSET', 'utf8mb4'));
 define('APP_ENV',    getEnvVar('APP_ENV', 'production'));
-define('APP_DEBUG', getEnvVar('APP_DEBUG', 'false') === 'true');
+define('APP_DEBUG', true); // sementara
+// define('APP_DEBUG', getEnvVar('APP_DEBUG', 'false') === 'true');
 define('CORS_ORIGIN', getEnvVar('CORS_ORIGIN', '*'));
 define('JWT_SECRET', getEnvVar('JWT_SECRET', 'NexaUMKM_JWT_Secret_Key_2026_XYZ'));
 define('N8N_WEBHOOK_URL', getEnvVar('N8N_WEBHOOK_URL', 'http://localhost:5678/webhook-test/submit-sisehat'));
